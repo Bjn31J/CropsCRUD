@@ -4,12 +4,15 @@ require_once('../sistema.class.php');
 class Usuario extends Sistema {
     function create($data) {
         $this->conexion();
+        $data =$data['data'];
+        $this->con->beginTransaction();
         $sql = "INSERT INTO usuario (correo, contrasena) VALUES (:correo, :contrasena)";
         $insertar = $this->con->prepare($sql);
         $data['contrasena'] = md5($data['contrasena']); // Encriptar la contraseña con MD5
         $insertar->bindParam(':correo', $data['correo'], PDO::PARAM_STR);
         $insertar->bindParam(':contrasena', $data['contrasena'], PDO::PARAM_STR);
         $insertar->execute();
+        $this->con->commit();
         return $insertar->rowCount();
     }
 
