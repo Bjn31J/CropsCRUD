@@ -4,7 +4,7 @@ class Invernadero extends Sistema{
     function create ($data) {
         $result=[];
         $this -> conexion();
-        $sql= "insert into invernadero (invernadero,latitud,longitud,area,fechaCreacion) 
+        $sql= "INSERT into invernadero (invernadero,latitud,longitud,area,fechaCreacion) 
         VALUES (:invernadero,:latitud,:longitud,:area,:fechaCreacion);";
         $insertar = $this-> con -> prepare($sql);
         $insertar -> bindParam(':invernadero', $data['invernadero'],PDO::PARAM_STR);
@@ -35,7 +35,7 @@ class Invernadero extends Sistema{
     function delete($id) {
         $result=[];
         $this-> conexion();
-        $sql="delete from invernadero where id_invernadero =:id_invernadero";
+        $sql="DELETE from invernadero where id_invernadero =:id_invernadero";
         $borrar = $this->con-> prepare($sql);
         $borrar -> bindParam(':id_invernadero',$id,PDO::PARAM_INT);
         $borrar -> execute();

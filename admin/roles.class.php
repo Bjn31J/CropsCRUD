@@ -23,7 +23,7 @@ class Roles extends Sistema {
 
     function delete($id) {
         $this->conexion();
-        $sql = "DELETE FROM rol WHERE id_rol = :id_rol";
+        $sql="DELETE FROM rol WHERE id_rol = :id_rol";
         $borrar = $this->con->prepare($sql);
         $borrar->bindParam(':id_rol', $id, PDO::PARAM_INT);
         $borrar->execute();
@@ -32,7 +32,7 @@ class Roles extends Sistema {
 
     function readOne($id) {
         $this->conexion();
-        $sql = "SELECT * FROM rol WHERE id_rol = :id_rol";
+        $sql="SELECT * FROM rol WHERE id_rol = :id_rol";
         $consulta = $this->con->prepare($sql);
         $consulta->bindParam(':id_rol', $id, PDO::PARAM_INT);
         $consulta->execute();
@@ -41,7 +41,7 @@ class Roles extends Sistema {
 
     function readAll() {
         $this->conexion();
-        $sql = "SELECT * FROM rol";
+        $sql="SELECT * FROM rol";
         $consulta = $this->con->prepare($sql);
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
