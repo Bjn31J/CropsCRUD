@@ -4,7 +4,7 @@ class Seccion extends Sistema{
     function create ($data) {
         $result=[];
         $this -> conexion();
-        $sql="INSERT into seccion(seccion,area,id_invernadero) 
+        $sql = "INSERT into seccion(seccion,area,id_invernadero) 
         VALUES(
         :seccion,
         :area, 

@@ -29,6 +29,8 @@ switch ($accion) {
         break;
     case 'actualizar':
         $usuario = $app->readOne($id);
+        $roles = $appRoles->readAll();
+        
         include('views/usuario/crear.php');
         break;
     case 'modificar':
