@@ -44,13 +44,15 @@ class Empleado extends Sistema {
 
     function readOne($id) {
         $this->conexion();
-        $sql = "SELECT * FROM empleado WHERE id_empleado = :id_empleado";
+        $sql = "SELECT e.*, u.correo 
+                FROM empleado e 
+                JOIN usuario u ON e.id_usuario = u.id_usuario
+                WHERE e.id_empleado = :id_empleado";
         $consulta = $this->con->prepare($sql);
         $consulta->bindParam(':id_empleado', $id, PDO::PARAM_INT);
         $consulta->execute();
         return $consulta->fetch(PDO::FETCH_ASSOC);
     }
-
     function readAll() {
         $this->conexion();
         $sql = "SELECT e.*, u.correo 
@@ -60,6 +62,12 @@ class Empleado extends Sistema {
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+    function getUsuarios() {
+        $this->conexion();
+        $sql = "SELECT id_usuario, correo FROM usuario";
+        $consulta = $this->con->prepare($sql);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

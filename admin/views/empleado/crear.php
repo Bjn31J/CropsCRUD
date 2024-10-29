@@ -31,10 +31,21 @@
         </div>
     </div>
     <div class="row mb-3">
-        <label for="id_usuario" class="col-sm-2 col-form-label">ID Usuario</label>
+        <label for="correo" class="col-sm-2 col-form-label">Correo</label>
         <div class="col-sm-10">
-            <input type="number" name="data[id_usuario]" class="form-control" placeholder="ID Usuario"
-                   value="<?php echo isset($empleado['id_usuario']) ? $empleado['id_usuario'] : ''; ?>" required/>
+            <select name="data[id_usuario]" class="form-select" required>
+                <option value="">Seleccione un correo</option>
+                <?php
+                // Obtener todos los usuarios y mostrar sus correos en el dropdown
+                $usuarios = $app->getUsuarios(); // Llamar a getUsuarios() para obtener la lista de correos
+                foreach ($usuarios as $usuario):
+                    $selected = (isset($empleado['id_usuario']) && $empleado['id_usuario'] == $usuario['id_usuario']) ? 'selected' : '';
+                ?>
+                    <option value="<?php echo $usuario['id_usuario']; ?>" <?php echo $selected; ?>>
+                        <?php echo $usuario['correo']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
     </div>
     <div class="row mb-3">
@@ -47,3 +58,5 @@
     <input type="submit" value="Guardar" class="btn btn-success"/>
 </form>
 <?php require('views/footer.php'); ?>
+
+
