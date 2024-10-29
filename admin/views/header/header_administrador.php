@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <!-- Dropdown for catalog -->
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCatalogo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Catálogo
@@ -28,9 +28,10 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownCatalogo">
                         <li><a class="dropdown-item" href="invernadero.php">Invernaderos</a></li>
                         <li><a class="dropdown-item" href="seccion.php">Secciones</a></li>
+                        <li><a class="dropdown-item" href="empleado.php">Empleados</a></li> 
                     </ul>
                 </li>
-                <!-- Dropdown for user management -->
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuario" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Usuario
@@ -41,7 +42,7 @@
                         <li><a class="dropdown-item" href="permisos.php">Permisos</a></li>
                     </ul>
                 </li>
-                <!-- Other links -->
+                <!-- Logout link -->
                 <li class="nav-item">
                     <a class="nav-link" href="login.php?accion=logout" aria-disabled="true">Salir</a>
                 </li>
@@ -50,8 +51,9 @@
     </div>
 </nav>
 
-<!-- Bootstrap JS and Popper.js -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
+
