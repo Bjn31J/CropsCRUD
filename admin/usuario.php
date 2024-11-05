@@ -6,7 +6,6 @@ $app = new Usuario();
 $app->checkRol('Administrador');
 $accion = (isset($_GET['accion'])) ? $_GET['accion'] : NULL;
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
-
 switch ($accion) {
     case 'crear':
         $roles = $appRoles -> readAll();
@@ -15,7 +14,6 @@ switch ($accion) {
         break;
     case 'nuevo':
         $data = $_POST;
-
         $resultado = $app->create($data);
         if ($resultado) {
             $mensaje = "El usuario se agregó correctamente";
@@ -67,6 +65,5 @@ switch ($accion) {
         $usuarios = $app->readAll();
         include 'views/usuario/index.php';
 }
-
 require_once('views/footer.php');
 ?>

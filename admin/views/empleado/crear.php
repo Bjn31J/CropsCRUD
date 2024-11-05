@@ -1,7 +1,7 @@
 <?php require('views/header/header_administrador.php'); ?>
 <h1><?php echo ($accion == "crear") ? "Nuevo " : "Modificar "; ?>Empleado</h1>
 
-<form action="empleado.php?accion=<?php echo ($accion == "crear") ? 'nuevo' : 'modificar&id=' . $id; ?>" method="post">
+<form action="empleado.php?accion=<?php echo ($accion == "crear") ? 'nuevo' : 'modificar&id=' . $id; ?>" method="post" enctype="multipart/form-data" >
     <div class="row mb-3">
         <label for="primer_apellido" class="col-sm-2 col-form-label">Primer Apellido</label>
         <div class="col-sm-10">
@@ -36,8 +36,7 @@
             <select name="data[id_usuario]" class="form-select" required>
                 <option value="">Seleccione un correo</option>
                 <?php
-                // Obtener todos los usuarios y mostrar sus correos en el dropdown
-                $usuarios = $app->getUsuarios(); // Llamar a getUsuarios() para obtener la lista de correos
+                $usuarios = $app->getUsuarios(); 
                 foreach ($usuarios as $usuario):
                     $selected = (isset($empleado['id_usuario']) && $empleado['id_usuario'] == $usuario['id_usuario']) ? 'selected' : '';
                 ?>
@@ -49,10 +48,9 @@
         </div>
     </div>
     <div class="row mb-3">
-        <label for="fotografia" class="col-sm-2 col-form-label">Fotografía</label>
+        <label for="fotografia" class="col-sm-2 col-form-label">fotografia</label>
         <div class="col-sm-10">
-            <input type="text" name="data[fotografia]" class="form-control" placeholder="URL de la fotografía"
-                   value="<?php echo isset($empleado['fotografia']) ? $empleado['fotografia'] : ''; ?>"/>
+            <input type="file" name="fotografia" class="form-control" placeholder="Coloca la fotografia" />       
         </div>
     </div>
     <input type="submit" value="Guardar" class="btn btn-success"/>

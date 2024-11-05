@@ -4,7 +4,6 @@ $app = new Empleado();
 $app->checkRol('Administrador');
 $accion = (isset($_GET['accion'])) ? $_GET['accion'] : NULL;
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
-
 switch ($accion) {
     case 'crear':
         include 'views/empleado/crear.php';
@@ -29,6 +28,7 @@ switch ($accion) {
     case 'modificar':
         $data = $_POST['data'];
         $resultado = $app->update($id, $data);
+        
         if ($resultado) {
             $mensaje = "El empleado se actualizó correctamente";
             $tipo = "success";
