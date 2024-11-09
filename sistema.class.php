@@ -1,4 +1,8 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 session_start();
 include('config.class.php');
 class Sistema
@@ -94,7 +98,6 @@ class Sistema
         require_once('views/header.php');
         $this->alert($tipo, $mensaje);
         require_once('views/footer.php');
-
     }
 
     function checkRol($rol)
@@ -115,10 +118,29 @@ class Sistema
             $this->alert($tipo, $mensaje);
             die();
         }
-
     }
-
-
-
+    function sendmail($destinatario, $asunto, $mensaje)
+    {
+        require 'vendor/autoload.php';
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->SMTPDebug = SMTP::DEBUG_OFF;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->SMTPAuth = true;
+        $mail->Username = '20030835@itcelaya.edu.mx';
+        $mail->Password = 'tlep dmgz pplr noeg';
+        $mail->setFrom('20030835@itcelaya.edu.mx', 'Benjamin');
+        $mail->addAddress($destinatario, 'Sistema Crops');
+        $mail->Subject = $asunto;
+        $mail->msgHTML($mensaje);
+        $mail->addAttachment('images/phpmailer_mini.png');
+        if (!$mail->send()) {
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message sent!';
+        }
+    }
 }
 ?>

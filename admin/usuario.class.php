@@ -29,6 +29,7 @@ class Usuario extends Sistema {
                     $insertar_rol->execute();
                 }
                 $this->con->commit();
+                $this->sendmail($data['correo'],'Bienvenido Crops','Bienvenido al sistema');
                 return $insertar->rowCount(); 
             }
         } catch (Exception $e) {
