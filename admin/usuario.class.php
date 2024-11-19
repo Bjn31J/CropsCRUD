@@ -71,13 +71,25 @@ class Usuario extends Sistema {
         }
         return false;
     }
-    function delete($id) {
+    function delete($id)
+    {
         $this->conexion();
-        $sql ="DELETE FROM usuario WHERE id_usuario = :id_usuario";
-        $borrar = $this->con->prepare($sql);
-        $borrar->bindParam(':id_usuario', $id, PDO::PARAM_INT);
-        $borrar->execute();
-        return $borrar->rowCount();
+        try {
+            $this->con->beginTransaction();
+            $sql = "DELETE FROM usuario_rol WHERE id_usuario = :id_usuario";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':id_usuario', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':id_usuario', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $this->con->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->con->rollBack();
+            throw new Exception("Error al eliminar el usuario: " . $e->getMessage());
+        }
     }
     function readOne($id) {
         $this->conexion();

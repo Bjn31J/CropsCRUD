@@ -55,10 +55,12 @@ switch ($accion) {
         $empleados = $app->readAll();
         include("views/empleado/index.php");
         break;
+    case 'imprimir':
+        $app -> imprimir($id);
+        die();
     default:
         $empleados = $app->readAll();
         include 'views/empleado/index.php';
 }
-
 require_once('views/footer.php');
 ?>

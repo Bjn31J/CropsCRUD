@@ -1,8 +1,6 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-
 session_start();
 include('config.class.php');
 class Sistema

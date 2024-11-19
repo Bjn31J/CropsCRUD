@@ -5,9 +5,7 @@ $appinvernadero = new Invernadero();
 $app=new Seccion();
 $app -> checkRol('Administrador');
 $accion = (isset($_GET['accion']))?$_GET['accion']:NULL;
-
 $id=(isset($_GET['id']))?$_GET['id']:null;
-
 switch($accion){
     case 'crear':
         $invernaderos = $appinvernadero -> readAll();
@@ -64,6 +62,9 @@ switch($accion){
         $secciones = $app -> readAll();
         require_once("views/seccion/index.php");
         break;
+    case 'reporte':
+        $app -> reporte();
+        die();
     default:
         $secciones = $app -> readAll();
         require_once("views/seccion/index.php");

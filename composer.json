@@ -1,5 +1,7 @@
 {
     "require": {
-        "phpmailer/phpmailer": "*"
+        "phpmailer/phpmailer": "*",
+        "spipu/html2pdf": "*",
+        "chillerlan/php-qrcode": "*"
     }
 }
