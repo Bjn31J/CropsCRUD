@@ -2,6 +2,7 @@
     <h1>Invernaderos</h1>
     <?php if(isset($mensaje)):$app->alert($tipo,$mensaje); endif;?>
     <a href="invernadero.php?accion=crear" class="btn btn-success" >Nuevo</a>
+    <a href="invernadero.php?accion=exportar_excel" class="btn btn-warning">Excel</a>
     <table class="table">
   <thead>
     <tr>

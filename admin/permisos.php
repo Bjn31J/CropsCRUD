@@ -59,6 +59,5 @@ switch ($accion) {
         $permisos = $app->readAll();
         include 'views/permisos/index.php';
 }
-
 require_once('views/footer.php');
 ?>

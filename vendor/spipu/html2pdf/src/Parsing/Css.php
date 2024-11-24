@@ -7,13 +7,12 @@
  *
  * @package   Html2pdf
  * @author    Laurent MINGUET <webmaster@html2pdf.fr>
- * @copyright 2023 Laurent MINGUET
+ * @copyright 2017 Laurent MINGUET
  */
 
 namespace Spipu\Html2Pdf\Parsing;
 
 use Spipu\Html2Pdf\CssConverter;
-use Spipu\Html2Pdf\Exception\HtmlParsingException;
 use Spipu\Html2Pdf\MyPdf;
 
 class Css
@@ -42,8 +41,6 @@ class Css
     public $css          = array(); // css values
     public $cssKeys      = array(); // css key, for the execution order
     public $table        = array(); // level history
-
-    protected $authorizedSchemes = ['file', 'http', 'https'];
 
     /**
      * Constructor
@@ -198,7 +195,7 @@ class Css
      */
     public function resetStyle($tagName = '')
     {
-        // prepare some values
+        // prepare somme values
         $border = $this->readBorder('solid 1px #000000');
         $units = array(
             '1px' => $this->cssConverter->convertToMM('1px'),
@@ -539,7 +536,7 @@ class Css
         $class = array();
         $tmp = isset($param['class']) ? strtolower(trim($param['class'])) : '';
         $tmp = explode(' ', $tmp);
-        foreach ($tmp as $v) {
+        foreach ($tmp as $k => $v) {
             $v = trim($v);
             if ($v) {
                 $class[] = $v;
@@ -609,7 +606,7 @@ class Css
      */
     public function analyse($tagName, &$param, $legacy = null)
     {
-        // prepare the information
+        // prepare the informations
         $tagName = strtolower($tagName);
         $id   = isset($param['id'])   ? strtolower(trim($param['id']))    : null;
         if (!$id) {
@@ -630,7 +627,7 @@ class Css
             '[[page_cu]]' => $this->pdf->getMyNumPage()
         );
         
-        foreach ($tmp as $v) {
+        foreach ($tmp as $k => $v) {
             $v = trim($v);
             if (strlen($v)>0) {
                 $v = str_replace(array_keys($toReplace), array_values($toReplace), $v);
@@ -1664,7 +1661,7 @@ class Css
             }
         }
 
-        // get the list of the keys
+        // get he list of the keys
         $this->cssKeys = array_flip(array_keys($this->css));
     }
 
@@ -1696,7 +1693,6 @@ class Css
                 $url = $tmp['href'];
 
                 // get the content of the css file
-                $this->checkValidPath($url);
                 $content = @file_get_contents($url);
 
                 // if "http://" in the url
@@ -1753,30 +1749,5 @@ class Css
         $nbLines = count(explode("\n", $match[0]))-1;
 
         return str_pad('', $nbLines, "\n");
-    }
-
-    /**
-     * @param string $path
-     * @return void
-     * @throws HtmlParsingException
-     */
-    public function checkValidPath($path)
-    {
-        $path = trim(strtolower($path));
-        $scheme = parse_url($path, PHP_URL_SCHEME);
-
-        if ($scheme === null) {
-            return;
-        }
-
-        if (in_array($scheme, $this->authorizedSchemes)) {
-            return;
-        }
-
-        if (strlen($scheme) === 1 && preg_match('/^[a-z]$/i', $scheme)) {
-            return;
-        }
-
-        throw new HtmlParsingException('Unauthorized path scheme');
     }
 }

@@ -1,7 +1,7 @@
 <?php
 require_once('invernadero.class.php');
 $app = new Invernadero();
-$app -> checkRol('Administrador');
+$app->checkRol('Administrador');
 $accion = (isset($_GET['accion'])) ? $_GET['accion'] : NULL;
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 
@@ -40,7 +40,6 @@ switch ($accion) {
         $invernaderos = $app->readAll();
         include('views/invernadero/index.php');
         break;
-
     case 'eliminar':
         if (!is_null($id)) {
             if (is_numeric($id)) {
@@ -57,9 +56,11 @@ switch ($accion) {
         $invernaderos = $app->readAll();
         include("views/invernadero/index.php");
         break;
+    case 'exportar_excel':
+        $app->exportToExcel();
+        die();
     default:
         $invernaderos = $app->readAll();
         include 'views/invernadero/index.php';
 }
 require_once('views/footer.php');
-?>
