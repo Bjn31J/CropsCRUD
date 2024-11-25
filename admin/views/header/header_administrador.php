@@ -28,7 +28,8 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownCatalogo">
                         <li><a class="dropdown-item" href="invernadero.php">Invernaderos</a></li>
                         <li><a class="dropdown-item" href="seccion.php">Secciones</a></li>
-                        <li><a class="dropdown-item" href="empleado.php">Empleados</a></li> 
+                        <li><a class="dropdown-item" href="empleado.php">Empleados</a></li>
+                        <li><a class="dropdown-item" href="index.php">Graficas</a></li> 
                     </ul>
                 </li>
                 

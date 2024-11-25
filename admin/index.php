@@ -1,10 +1,10 @@
 <?php 
-require('views/header.php');
+include('views/header/header_administrador.php');
 require_once('invernadero.class.php');
 $app =  new Invernadero();
 $data = $app->readAll();
 ?>
-<h2>Bienvenido al Sistemas</h2>
+<h2>Bienvenido a las graficas</h2>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load("current", { packages: ['corechart'] });
