@@ -70,22 +70,22 @@ class Invernadero extends Sistema
     function exportToExcel()
     {
         require '../vendor/autoload.php';
-
+    
         $this->conexion();
         $sql = "SELECT id_invernadero, invernadero, latitud, longitud, area, fechaCreacion FROM invernadero";
         $consulta = $this->con->prepare($sql);
         $consulta->execute();
         $invernaderos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-
+    
         if (empty($invernaderos)) {
             echo "No hay invernaderos para exportar.";
             exit;
         }
-
+    
         // Crear el archivo Excel
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-
+    
         // Encabezados
         $sheet->setCellValue('A1', 'ID');
         $sheet->setCellValue('B1', 'Nombre del Invernadero');
@@ -93,7 +93,7 @@ class Invernadero extends Sistema
         $sheet->setCellValue('D1', 'Longitud');
         $sheet->setCellValue('E1', 'Área (m²)');
         $sheet->setCellValue('F1', 'Fecha de Creación');
-
+    
         // Datos
         $row = 2;
         foreach ($invernaderos as $invernadero) {
@@ -105,14 +105,26 @@ class Invernadero extends Sistema
             $sheet->setCellValue('F' . $row, $invernadero['fechaCreacion']);
             $row++;
         }
-
+    
         // Configurar el archivo para descarga
         $fileName = 'invernaderos_' . date('Y-m-d_H-i-s') . '.xlsx';
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-
+    
+        // **Solución al problema de salida previa**
+        // Limpia cualquier buffer de salida previo
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+    
+        // Configurar encabezados HTTP
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
+        header('Cache-Control: max-age=0');
+    
+        // Enviar el archivo Excel al navegador
         $writer->save('php://output');
         exit;
     }
+    
+
 }

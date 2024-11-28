@@ -8,13 +8,16 @@ $data = [];
 switch ($accion) {
     case 'POST':
         $datos = $_POST;
+        if(!is_null($id) && is_numeric($id)){
+            $resultado = $app->update($id, $datos);
+        }else{
         $resultado = $app->create($datos);
-        echo($resultado);
+        }
         if($resultado == 1){
-            $data['mensaje'] = 'El permiso se creo correctamente';
+            $data['mensaje'] = 'El permiso se ha guardado correctamente';
 
         }else{
-            $data['mensaje'] = 'El permiso  no se creo correctamente';
+            $data['mensaje'] = 'El permiso  no se ha guardado correctamente';
 
         }
         break;
@@ -24,10 +27,8 @@ switch ($accion) {
                 $resultado = $app->delete($id);
                 if ($resultado) {
                     $mensaje = "El permiso se ha eliminado correctamente";
-                    
                 } else {
                     $mensaje = "Ocurrió un error al eliminar el permiso";
-                    
                 }
             }
         }
