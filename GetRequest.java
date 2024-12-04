@@ -5,7 +5,7 @@ import java.net.URL;
 
 public class GetRequest {
     public static void main(String[] args) throws Exception {
-        String url = "http://localhost/crops/admin/permisos.api.php";
+        String url = "http://localhost/crops/admin/invernadero.api.php";
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
